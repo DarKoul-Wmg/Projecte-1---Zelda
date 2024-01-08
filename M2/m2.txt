@@ -1,1 +1,62 @@
+M02 Base de dades
 
+La base de dades ha de poder gestionar la informació de les partides mentre s'estan
+jugant, i recuperar les partides guardades per continuar quan l’usuari ho demani.
+
+Un exemple de BD per aquest joc es mostra a sota. (Imagen en el pdf)
+- Estructura de dades per
+guardar l’inventari de cada
+partida.
+
+- Estructura de dades per
+guardar els elements,
+enemics, santuaris i cofres, de
+cada partida.
+
+També s’han de fer preguntes a la BD, per això s’afegirà : una opció consultes BD al
+menú principal. Una vegada dins l’opció consultes BD es mostrarà un menú amb les
+següents consultes:
+
+1. Usuaris que han jugat,
+2. Quantitat de partides jugades per usuari,
+3. Armes usades per cada usuari i dades de la partida on n’ha gastat més.
+4. Menjar consumit per cada usuari i dades de la partida on n’ha consumit més.
+5. Estadística de “blood moons”,
+
+Cada consulta:
+1 Usuaris que han jugat: 
+Llista dels usuaris que han jugat partides.
+Mostrar nom de l’usuari i la data de la darrera partida que ha jugat.
+
+2 Quantitat de partides jugades per usuari:
+Llista dels usuaris i quantes partides han jugat.
+Mostrar nom de l’usuari i quantes partides ha
+jugat.
+
+3 Armes usades per cada usuari i dades de la partida on n’ha gastat
+més: 
+Llista de les armes diferents que ha aconseguitcada usuari.
+Mostrar nom d l’usuari, nom de l’arma, quantitat de vegades que l’ha obtingut, i data de la partida on l’ha usat més vegades.
+
+4 Menjar consumit per cada usuari i dades de la partida on n’ha consumit més:
+Llista dels articles de menjar diferents que ha aconseguit cada usuari. Mostrar nom d l’usuari, nom del menjar, quantitat de vegades que l’ha obtingut, i data de la partida on l’ha consumit més vegades.
+
+5 Estadística de “blood moons:
+● MItjana de blood moons de les partides jugades.
+● Dades de la partida on han aparegut més blood moons, data partida, nom del jugador i quantitat de blood moons.
+
+Especificacions no funcionals:
+- Generar el model entitat-relació que correspongui a la base de dades MySQL
+- La base de dades ha de contenir tot el necessari per la seva consistència
+- Cal desenvolupar 2 scripts:
+● 1_Create_DB: que crea totes les taules amb diferents atributs sense cap
+restricció
+● 2_Alter_Table: que afegeix les restriccions de les taules i els atributs,
+mitjançant sintaxis alter sempre que sigui possible. Especifica PKs, FKs,
+Camps únics, NULL, Default, …
+- Totes les taules han de contenir atributs de control (dates de creació,
+modificació, …)
+- Les claus foranes han de seguir la següent nomenclatura:
+- fk_taulaorigen_tauladesti
+- Totes les columnes referides a dates de modificació i usuaris de modificació han
+de permetre ‘null'

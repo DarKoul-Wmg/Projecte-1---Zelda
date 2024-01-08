@@ -1,1 +1,8 @@
-
+Fer que el joc de Zelda funcioni segons les indicacions anteriors.
+Especificacions no funcionals:
+Les dades bàsiques amb els mapes i pantalles del joc es llegiran d’un arxiu .py importat,
+que contindrà els diccionaris:
+locations = { … } amb les localitzacions de joc
+data = { … } amb les dades inicials del joc, la posició dels objectes/enemics …
+Les partides s’han de guardar i recuperar de la base de dades. No es pot guardar
+informació dels mapes a la base de dades ni modificar les dades inicials.

@@ -1,1 +1,15 @@
-
+M01 Sistemes informàtics
+Crear una màquina virtual a Azure per fer anar el servidor de base de dades.
+- Configurar la xarxa, s’hi ha de poder accedir des de fora de la màquina
+- Crear un usuari amb el nom del grup que tingui permisos de ‘sudoers’
+- Instal·lar MySQL amb ‘secure installation’
+● Establir un usuari ‘root’ amb contrasenya ‘root’
+● Eliminar l’accés anònim
+● Eliminar la base de dades de test accessible per tots els usuaris, inclosos
+els anònims, i eliminar els privilegis que permeten a qualsevol usuari
+accedir a les bases de dades amb noms que comencen per test.
+Especificacions no funcionals:
+Cal instal·lar un sistema Debian tenint en compte que:
+- La màquina ha de tenir 2 discos (30Gb pel sistema i 10 per dades i usuaris)
+- Configurar la xarxa
+- Instal·lar el MySQL

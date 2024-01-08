@@ -1,1 +1,13 @@
-
+Control de versions
+- Heu de treballar des de GitHub, mirarem qui ha fet els commits i quins missatges
+de canvis heu posat.
+- El projecte tindrà una carpeta per cada mòdul M1, M2, M3, M4 i M5
+- El projecte tindrà un “README.md” amb una petita explicació del projecte i les instruccions per fer-lo anar.
+- Cada alumne treballa en la seva pròpia branca de treball i farà un mínim de 3
+commits al projecte.
+Especificacions no funcionals:
+- La branca principal del projecte de GitHub s’ha de dir “main”
+- Hi haurà una branca anomenada “preproducció” on es fan els “merge”
+- El lliurament final del projecte s’ha de fer en forma de ‘release’ a GitHub
+- La ‘release’ la farà el propietari del repositori
+- Es lliurarà la URL de la “release” en una tasca del Moodle de M5

@@ -1,1 +1,15 @@
-
+Cal desenvolupar 4 pàgines amb les següents seccions:
+- Principal conté informació publicitaria del joc, amb imatges d’una partida
+- Tutorial, conté una explicació de com funciona el joc, les opcions i seccions
+- About Us, conté informació dels programadors del joc
+Totes les pàgines tenen un menú ‘sticky’ a la part superior, i un footer amb el missatge
+de ©Copyright.
+Especificacions no funcionals:
+- Cal que el posicionament dels elements sigui Flex i s’adapti a dispositius mòbils.
+- A la portada hi ha d’haver algun element animat amb CSS.
+- L’HTML no pot tenir CSS incrustat ni elements ‘style’
+- L’estètica ha de ser professional i actual, feu servir alguna web de referència
+- La carpeta de la web ha de contenir tot el necessari per fer-la anar
+- Les rutes als arxius i imatges han de ser relatives i funcionar en qualsevol
+equip/sistema/navegador
+- Els arxius han de tenir una organització entenedora i coherent

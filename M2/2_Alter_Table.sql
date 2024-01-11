@@ -2,7 +2,7 @@
 use zelda;
 
 ALTER TABLE game 
-	MODIFY game_id INT NOT NULL,
+	MODIFY game_id INT AUTO_INCREMENT NOT NULL,
     MODIFY user_name VARCHAR(50) NOT NULL,
     MODIFY hearts_remaining INT,
     MODIFY blood_moon_countdown INT,

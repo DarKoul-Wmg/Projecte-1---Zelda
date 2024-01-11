@@ -16,7 +16,6 @@ DROP TABLE IF EXISTS game_chests_opened;
 CREATE TABLE IF NOT EXISTS game (
 	game_id INT,
     user_name VARCHAR(50),
-    date_started DATE,
     hearts_remaining INT,
     blood_moon_countdown INT,
     blood_moon_appearances INT,

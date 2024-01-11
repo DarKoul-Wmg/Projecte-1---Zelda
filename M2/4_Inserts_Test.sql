@@ -1,8 +1,8 @@
 use zelda;
 
-insert into game(game_id,user_name,date_started,hearts_remaining,blood_moon_countdown,blood_moon_appearances,region) values
-(0,'Link','2023-01-01',4,5,6,'Hyrule'),
-(1,'Paco','2023-01-02',5,6,7,'Gerudo');
+insert into game(game_id,user_name,hearts_remaining,blood_moon_countdown,blood_moon_appearances,region) values
+(0,'Link',4,5,6,'Hyrule'),
+(1,'Paco',5,6,7,'Gerudo');
 
 insert into game_food(game_id,food_name,quantity_remaining) values
 (0,'Vegetables',3),

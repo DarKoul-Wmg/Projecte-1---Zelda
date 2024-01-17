@@ -7,6 +7,9 @@ from funciones1 import *
 from base_zelda import *
 import random
 
+flg_game=True
+flg_map=False
+
 #----COPIA DE DICCIONARIOS ORIGINALES PARA PLAYER----
 locations=copiar_diccionario_anidado(base_zelda.locations)
 data=copiar_diccionario_anidado(base_zelda.data)
@@ -20,7 +23,7 @@ data=copiar_diccionario_anidado(base_zelda.data)
 actual_location='hyrule'
 bm_countdown=25
 bm_appearances=0
-promptlist=["hola"]
+promptlist=[]
 
 
 
@@ -34,16 +37,14 @@ locations[actual_location][playerY][playerX]="X"
 promptlist.append(fox_spawn(actual_location, data))
 
 
-
-
-while True:
+while flg_game==True:
     if bm_countdown==0:
         promptlist.append("The Blood Moon rises once again. Please be careful, Link.")
         #si el countdown llega a 0, se añade una aparición al contador de appearances
         bm_appearances+=1
         #............restaurar vida de todos los enemigos y poner en original pos
         #se restaura el contador a 25
-        bm_countdown == 25
+        bm_countdown=25
 
     #---- LISTA INTERACCIONES REINICIO:
     attack=True
@@ -102,7 +103,7 @@ while True:
     # ---- PRINTS MAPA ----
     #con todo lo que se ha cambiado en el mapa en actualizacion de locations, inventario se imprime pantalla
     #Prints mapa (.............falta sumar inventario)
-    for y in range(len(locations[actual_location])):
+    for y in range(len(locations[actual_location])-1):
         for x in range(len(locations[actual_location][0])):
             print((locations[actual_location][y][x]), end="")
         print()
@@ -123,8 +124,29 @@ while True:
     # ----------------------------------------------------
     # ----------------------------------------------------
 
+    if pregunta=="show map":
+        print("TAMOS DENTRO")
+        flg_map=True
+
+        while flg_map == True:
+            sanctuaries_opened_map(locations, data)
+            for y in range(len(locations["map"])-1):
+                for x in range(len(locations["map"][0])):
+                    print((locations["map"][y][x]), end="")
+                print()
+            print("* Back  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *")
+            prompt(promptlist)
+            pregunta = input("What to do now?")
+            promptlist.append(pregunta)
+            if pregunta.lower() == "back":
+                flg_map = False
+
+            else:
+                print("Invalid action!")
+
+
     #---- CAMBIO DE LOCATION ----
-    if pregunta[0:5]== 'go to':
+    elif pregunta[0:5]== 'go to':
         if pregunta.replace('go to ', "")=='hyrule' and actual_location in ('death_mountain', 'castle', 'gerudo'):
             #donde antes estaba la X lo deja en blanco
             locations[actual_location][playerY][playerX] = " "
@@ -376,9 +398,14 @@ while True:
                 # busca cual es el id del santuario a la derecha del player
                 for sanctuary_key in data[actual_location]["sanctuaries"].keys():
                     if data[actual_location]["sanctuaries"][sanctuary_key]["ypos"] == playerY and data[actual_location]["sanctuaries"][sanctuary_key]["xpos"] == playerX + 1:
-                        # cambiamos a abierto el santuario
-                        data[actual_location]["sanctuaries"][sanctuary_key]["open"] = True
-                        promptlist.append("You opened the sanctuary, your maximum health has increased by 1.")
+                        #si ya está abierto
+                        if data[actual_location]["sanctuaries"][sanctuary_key]["open"] == True:
+                            promptlist.append("You already opened this sanctuary!")
+                        #si está cerrado, abrimos
+                        elif data[actual_location]["sanctuaries"][sanctuary_key]["open"] == False:
+                            # cambiamos a abierto el santuario
+                            data[actual_location]["sanctuaries"][sanctuary_key]["open"] = True
+                            promptlist.append("You opened the sanctuary, your maximum health has increased by 1.")
 
             elif locations[actual_location][playerY][playerX + 1] == "M":
                 # busca cual es el id del chest a la derecha del player
@@ -393,9 +420,14 @@ while True:
                 # busca cual es el id del santuario a la derecha del player
                 for sanctuary_key in data[actual_location]["sanctuaries"].keys():
                     if data[actual_location]["sanctuaries"][sanctuary_key]["ypos"] == playerY-1 and data[actual_location]["sanctuaries"][sanctuary_key]["xpos"] == playerX:
-                        # cambiamos a abierto el santuario
-                        data[actual_location]["sanctuaries"][sanctuary_key]["open"] = True
-                        promptlist.append("You opened the sanctuary, your maximum health has increased by 1.")
+                        # si ya está abierto
+                        if data[actual_location]["sanctuaries"][sanctuary_key]["open"] == True:
+                            promptlist.append("You already opened this sanctuary!")
+                        # si está cerrado, abrimos
+                        elif data[actual_location]["sanctuaries"][sanctuary_key]["open"] == False:
+                            # cambiamos a abierto el santuario
+                            data[actual_location]["sanctuaries"][sanctuary_key]["open"] = True
+                            promptlist.append("You opened the sanctuary, your maximum health has increased by 1.")
 
             elif locations[actual_location][playerY-1][playerX] == "M":
                 # busca cual es el id del chest a la derecha del player
@@ -410,9 +442,14 @@ while True:
                 # busca cual es el id del santuario a la derecha del player
                 for sanctuary_key in data[actual_location]["sanctuaries"].keys():
                     if data[actual_location]["sanctuaries"][sanctuary_key]["ypos"] == playerY+1 and data[actual_location]["sanctuaries"][sanctuary_key]["xpos"] == playerX:
-                        # cambiamos a abierto el santuario
-                        data[actual_location]["sanctuaries"][sanctuary_key]["open"] = True
-                        promptlist.append("You opened the sanctuary, your maximum health has increased by 1.")
+                        # si ya está abierto
+                        if data[actual_location]["sanctuaries"][sanctuary_key]["open"] == True:
+                            promptlist.append("You already opened this sanctuary!")
+                        # si está cerrado, abrimos
+                        elif data[actual_location]["sanctuaries"][sanctuary_key]["open"] == False:
+                            # cambiamos a abierto el santuario
+                            data[actual_location]["sanctuaries"][sanctuary_key]["open"] = True
+                            promptlist.append("You opened the sanctuary, your maximum health has increased by 1.")
 
             elif locations[actual_location][playerY+1][playerX] == "M":
                 # busca cual es el id del chest a la derecha del player
@@ -437,4 +474,10 @@ while True:
 
     #al final del turno, quitamos 1 de la cuenta atrás de blood moons
     bm_countdown -= 1
+
+
+
+
+
+
 

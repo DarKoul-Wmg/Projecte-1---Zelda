@@ -93,6 +93,19 @@ def arboles_respawn(locations, actual_location, data):
                  #vuelve a poner una "T" en su sitio
                  locations[actual_location][data[actual_location]["trees"][tree_key]['ypos']][data[actual_location]["trees"][tree_key]['xpos']] = "T"
 
+def sanctuaries_opened_map(locations, data,):
+    lista_locations=[]
+    for location in data.keys():
+        lista_locations.append(location)
+    lista_locations=lista_locations[:5]
+
+    for location in lista_locations:
+        for sanct_key in data[location]['sanctuaries'].keys():
+            if data[location]['sanctuaries'][sanct_key]['open']==True:
+                for y in range(len(locations['map'])):
+                    for x in range(len(locations['map'][y])):
+                        if locations['map'][y][x] == f"{sanct_key}":
+                            locations['map'][y][x + 1] = " "
 
 
 
@@ -169,11 +182,6 @@ def actions(cook,fish,open): #MONTA LA LÍNEA DE ACCIONES
 
 
 
-
-
-
-
-
 def prompt(list):
     while len(list)>8:
         list=list[1:]
@@ -190,3 +198,7 @@ def clear_screen():
         os.system('cls')
     else:
         os.system('clear')
+
+
+
+

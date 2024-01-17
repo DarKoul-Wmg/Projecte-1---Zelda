@@ -10,6 +10,7 @@ game = { #JUGADOR
         "region": "hyrule",
         "created_at": datetime.datetime.now(),
         "modified_at": datetime.datetime.now(),
+        "ganon_dead":1
 
     },
     "foods": { #COMIDA
@@ -269,10 +270,11 @@ def updateGame(game):
         " blood_moon_countdown = {},"\
         " blood_moon_appearances = {},"\
         " region = '{}',"\
-        " modified_at = '{}' WHERE game_id = {};".format(
+        " modified_at = '{}'," \
+        "ganon_dead = {} WHERE game_id = {};".format(
             game["player"]["user_name"], game["player"]["health"],
             game["player"]["bm_countdown"], game["player"]["total_blood_moon"],
-            game["player"]["region"], modified_at, game["game_id"]
+            game["player"]["region"], modified_at, game["player"]["ganon_dead"],game["game_id"]
         )
 
     insertar_datos(query)
@@ -356,6 +358,7 @@ def updateSanctuariesOpened(game):
                 )
         insertar_datos(query)
 
+
 def insertar_datos(insertar):
     config = {
         'user': 'Cartucho6r',
@@ -372,21 +375,20 @@ def insertar_datos(insertar):
     finally:
         cursor.close()
         conexion.close()
-        
-#GUARDADO TOTAL
+# Llamada a las funciones de actualización
 def update_all():
     updateGame(game)
-    #print("Game actualizado")
+    print("Game actualizado")
     updateFoods(game)
-    #print("Foods actualizado")
+    print("Foods actualizado")
     updateWeapons(game)
-    #print("Weapons actualizado")
+    print("Weapons actualizado")
     updateEnemies(game)
-    #print("Enemies actualizado")
+    print("Enemies actualizado")
     updateChestsOpened(game)
-    #print("Chests actualizado")
+    print("Chests actualizado")
     updateSanctuariesOpened(game)
-    #print("Sanctuaries actualizado")
+    print("Sanctuaries actualizado")
 
 update_all()
 

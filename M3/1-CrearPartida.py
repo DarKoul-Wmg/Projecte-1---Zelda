@@ -1,8 +1,7 @@
 import mysql.connector
 import datetime
-
 game = { #JUGADOR
-    "game_id": 6,
+    "game_id": 9,
     "player": {
         "user_name": "Link",
         "health": 2,
@@ -11,6 +10,7 @@ game = { #JUGADOR
         "region": "hyrule",
         "created_at": datetime.datetime.now(),
         "modified_at": datetime.datetime.now(),
+        "ganon_dead":0
 
     },
     "foods": { #COMIDA
@@ -261,7 +261,101 @@ game = { #JUGADOR
     }
 }
 
-def Get_Game(game_id):
+
+def insertGame(game):
+    game["player"]["modified_at"] = datetime.datetime.now()
+    created_at = game["player"]["created_at"].strftime('%Y-%m-%d %H:%M:%S')
+    modified_at = game["player"]["modified_at"].strftime('%Y-%m-%d %H:%M:%S')
+
+    query = "INSERT INTO game"\
+        "(game_id, user_name, hearts_remaining, blood_moon_countdown, blood_moon_appearances, region, created_at, modified_at)"\
+        "VALUES ({}, '{}', {}, {}, {}, '{}', '{}', '{}',{});".format(
+            game["game_id"], game["player"]["user_name"], game["player"]["health"],
+            game["player"]["bm_countdown"], game["player"]["total_blood_moon"],
+            game["player"]["region"], created_at, modified_at,game["player"]["ganon_dead"])
+
+    insertar_datos(query)
+
+def insertFoods(game):
+    for food_name, food_data in game["foods"].items():
+        food_data["modified_at"] = datetime.datetime.now()
+        created_at = food_data["created_at"].strftime('%Y-%m-%d %H:%M:%S')
+        modified_at = food_data["modified_at"].strftime('%Y-%m-%d %H:%M:%S')
+
+        query = "INSERT INTO game_food"\
+                "(game_id, food_name, quantity_remaining, created_at, modified_at)"\
+                "VALUES ({}, '{}', {}, '{}', '{}')".format(game["game_id"], food_name,
+                                                           food_data["quantity_remaining"],
+                                                           created_at, modified_at)
+        insertar_datos(query)
+
+
+def insertWeapons(game):
+    for weapon_name, weapon_data in game["weapons"].items():
+        weapon_data["modified_at"] = datetime.datetime.now()
+        created_at = weapon_data["created_at"].strftime('%Y-%m-%d %H:%M:%S')
+        modified_at = weapon_data["modified_at"].strftime('%Y-%m-%d %H:%M:%S')
+
+        query = "INSERT INTO game_weapons"\
+                "(game_id, weapon_name, equiped, lives_remaining, created_at, modified_at, total_weapons)"\
+                "VALUES ({}, '{}', {}, {}, '{}', '{}', {})".format(game["game_id"], weapon_name,
+                                                                  weapon_data["equipped"],
+                                                                  weapon_data["lives_remaining"],
+                                                                  created_at, modified_at,
+                                                                  weapon_data["total_weapons"])
+        insertar_datos(query)
+
+def insertEnemies(game):
+    for enemy_id, enemy_data in game["enemies"].items():
+        enemy_data["modified_at"] = datetime.datetime.now()
+        created_at = enemy_data["created_at"].strftime('%Y-%m-%d %H:%M:%S')
+        modified_at = enemy_data["modified_at"].strftime('%Y-%m-%d %H:%M:%S')
+
+        query = "INSERT INTO game_enemies"\
+                "(game_id, region, num, xpos, ypos, lifes_remaining, created_at, modified_at)"\
+                "VALUES ({}, '{}', {}, {}, {}, {}, '{}', '{}')".format(game["game_id"],enemy_data["region"],
+                                                                      enemy_id,
+                                                                      enemy_data["xpos"],
+                                                                      enemy_data["ypos"],
+                                                                      enemy_data["lifes_remaining"],
+                                                                      created_at, modified_at)
+        insertar_datos(query)
+
+def insertChestsOpened(game):
+    for chest_id, chest_data in game["chests_opened"].items():
+        chest_data["modified_at"] = datetime.datetime.now()
+        created_at = chest_data["created_at"].strftime('%Y-%m-%d %H:%M:%S')
+        modified_at = chest_data["modified_at"].strftime('%Y-%m-%d %H:%M:%S')
+
+        query = "INSERT INTO game_chests_opened"\
+                "(game_id, region, num, xpos, ypos, created_at, modified_at, open)"\
+                "VALUES ({}, '{}', {}, {}, {}, '{}', '{}', {})".format(game["game_id"],
+                                                                   chest_data["region"],
+                                                                   chest_id,
+                                                                   chest_data["xpos"],
+                                                                   chest_data["ypos"],
+                                                                   created_at, modified_at,
+                                                                   chest_data["open"])
+        insertar_datos(query)
+
+def insertSanctuariesOpened(game):
+    for sanctuary_id, sanctuary_data in game["sanctuaries_opened"].items():
+        sanctuary_data["modified_at"] = datetime.datetime.now()
+        created_at = sanctuary_data["created_at"].strftime('%Y-%m-%d %H:%M:%S')
+        modified_at = sanctuary_data["modified_at"].strftime('%Y-%m-%d %H:%M:%S')
+
+        query = "INSERT INTO game_sanctuaries_opened"\
+                "(game_id, region, num, xpos, ypos, created_at, modified_at, open)"\
+                "VALUES ({}, '{}', {}, {}, {}, '{}', '{}', {})".format(game["game_id"],
+                                                                  sanctuary_data["region"],
+                                                                  sanctuary_id,
+                                                                  sanctuary_data["xpos"],
+                                                                  sanctuary_data["ypos"],
+                                                                  created_at, modified_at,
+                                                                  sanctuary_data["open"])
+        insertar_datos(query)
+
+def insertar_datos(insertar):
     config = {
         'user': 'Cartucho6r',
         'password': 'Cartucho61234',
@@ -269,65 +363,28 @@ def Get_Game(game_id):
         'database': 'zelda',
     }
     conexion = mysql.connector.connect(**config)
-
     try:
-        cursor = conexion.cursor(dictionary=True)
-
-        # player
-        query = f"SELECT * FROM game WHERE game_id = {game_id}"
-        cursor.execute(query)
-        player_data = cursor.fetchone()
-
-        # food
-        query = f"SELECT * FROM game_food WHERE game_id = {game_id}"
-        cursor.execute(query)
-        foods_data = cursor.fetchall()
-
-        # weapons
-        query = f"SELECT * FROM game_weapons WHERE game_id = {game_id}"
-        cursor.execute(query)
-        weapons_data = cursor.fetchall()
-
-        # enemies
-        query = f"SELECT * FROM game_enemies WHERE game_id = {game_id}"
-        cursor.execute(query)
-        enemies_data = cursor.fetchall()
-
-        # chests
-        query = f"SELECT * FROM game_chests_opened WHERE game_id = {game_id}"
-        cursor.execute(query)
-        chests_data = cursor.fetchall()
-
-        # sanctuaries
-        query = f"SELECT * FROM game_sanctuaries_opened WHERE game_id = {game_id}"
-        cursor.execute(query)
-        sanctuaries_data = cursor.fetchall()
-
-        # DICCIONARIO RECUPÈRADO
-        game = {
-            "game_id": game_id,
-            "player": player_data,
-            "foods": {food["food_name"]: food for food in foods_data},
-            "weapons": {weapon["weapon_name"]: weapon for weapon in weapons_data},
-            "enemies": {enemy["num"]: enemy for enemy in enemies_data},
-            "chests_opened": {chest["num"]: chest for chest in chests_data},
-            "sanctuaries_opened": {sanctuary["num"]: sanctuary for sanctuary in sanctuaries_data}
-        }
-
-        return game
-
+        cursor = conexion.cursor()
+        cursor.execute(insertar)
+        conexion.commit()
+        return True
     finally:
         cursor.close()
         conexion.close()
 
+# Llamada a las funciones
+def insert_all():
+    insertGame(game)
+    print("Game insertado")
+    insertFoods(game)
+    print("food insertado")
+    insertWeapons(game)
+    print("weapons insertado")
+    insertEnemies(game)
+    print("enemies insertado")
+    insertChestsOpened(game)
+    print("chests insertado")
+    insertSanctuariesOpened(game)
+    print("sanct insertado")
 
-
-
-#PASARLE LA ID DE LA PARTIDA SELECCIONADA EN EL MENU SAVED GAMES
-game_id = 9
-#game_recuperado = Get_Game(game_id)
-#print(game_recuperado)
-Get_Game(game_id)
-
-# game_id = 3  # id a recuperar
-# GetGame(game_id)
+insert_all()

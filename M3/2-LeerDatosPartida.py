@@ -11,6 +11,7 @@ game = { #JUGADOR
         "region": "hyrule",
         "created_at": datetime.datetime.now(),
         "modified_at": datetime.datetime.now(),
+        "ganon_dead": 0
 
     },
     "foods": { #COMIDA
@@ -260,7 +261,6 @@ game = { #JUGADOR
 
     }
 }
-
 def Get_Game(game_id):
     config = {
         'user': 'Cartucho6r',
@@ -321,13 +321,10 @@ def Get_Game(game_id):
         conexion.close()
 
 
-
-
-#PASARLE LA ID DE LA PARTIDA SELECCIONADA EN EL MENU SAVED GAMES
 game_id = 9
-#game_recuperado = Get_Game(game_id)
-#print(game_recuperado)
-Get_Game(game_id)
+game_recuperado = Get_Game(game_id)
+print(game_recuperado)
+
 
 # game_id = 3  # id a recuperar
 # GetGame(game_id)

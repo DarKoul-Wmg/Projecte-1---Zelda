@@ -10,6 +10,7 @@ game = { #JUGADOR
         "region": "hyrule",
         "created_at": datetime.datetime.now(),
         "modified_at": datetime.datetime.now(),
+        "ganon_dead":0
 
     },
     "foods": { #COMIDA
@@ -268,10 +269,10 @@ def insertGame(game):
 
     query = "INSERT INTO game"\
         "(game_id, user_name, hearts_remaining, blood_moon_countdown, blood_moon_appearances, region, created_at, modified_at)"\
-        "VALUES ({}, '{}', {}, {}, {}, '{}', '{}', '{}');".format(
+        "VALUES ({}, '{}', {}, {}, {}, '{}', '{}', '{}',{});".format(
             game["game_id"], game["player"]["user_name"], game["player"]["health"],
             game["player"]["bm_countdown"], game["player"]["total_blood_moon"],
-            game["player"]["region"], created_at, modified_at,)
+            game["player"]["region"], created_at, modified_at,game["player"]["ganon_dead"])
 
     insertar_datos(query)
 
@@ -371,21 +372,19 @@ def insertar_datos(insertar):
         cursor.close()
         conexion.close()
 
-# CREAR PARTIDA EN DDBB
+# Llamada a las funciones
 def insert_all():
     insertGame(game)
-    #print("Game insertado")
+    print("Game insertado")
     insertFoods(game)
-    #print("food insertado")
+    print("food insertado")
     insertWeapons(game)
-    #print("weapons insertado")
+    print("weapons insertado")
     insertEnemies(game)
-    #print("enemies insertado")
+    print("enemies insertado")
     insertChestsOpened(game)
-    #print("chests insertado")
+    print("chests insertado")
     insertSanctuariesOpened(game)
-    #print("sanct insertado")
+    print("sanct insertado")
 
 insert_all()
-
-

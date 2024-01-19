@@ -1,4 +1,3 @@
-
 use zelda;
 
 ALTER TABLE game 
@@ -6,11 +5,13 @@ ALTER TABLE game
     MODIFY user_name VARCHAR(50) NOT NULL,
     MODIFY hearts_remaining INT,
     MODIFY blood_moon_countdown INT,
-	MODIFY blood_moon_appearances INT,
-    ADD CONSTRAINT game_region CHECK (region IN ("Hyrule","Death mountain","Gerudo","Necluda","Castle")),
+    MODIFY blood_moon_appearances INT,
+    ADD CONSTRAINT game_region CHECK (region IN ("Hyrule","Death_mountain","Gerudo","Necluda","Castle")),
     MODIFY created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    MODIFY modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE NOW(),    
+    MODIFY modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE NOW(),
+    MODIFY ganon_dead BOOLEAN DEFAULT 0,  
     ADD CONSTRAINT pk_game PRIMARY KEY (game_id);
+
     
 ALTER TABLE game_food 
 	MODIFY food_name VARCHAR(20) NOT NULL,
@@ -43,6 +44,7 @@ ALTER TABLE game_sanctuaries_opened
     ADD CONSTRAINT pk_game_sanctuaries_opened PRIMARY KEY (game_id, region, num),
     ADD CONSTRAINT fk_game_game_sanctuaries_opened FOREIGN KEY (game_id) REFERENCES game(game_id),
     MODIFY created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    MODIFY open BOOLEAN DEFAULT 0,
     MODIFY modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE NOW();
 
 ALTER TABLE game_chests_opened 
@@ -51,5 +53,5 @@ ALTER TABLE game_chests_opened
     ADD CONSTRAINT pk_game_chests_opened PRIMARY KEY (game_id, region, num),
     ADD CONSTRAINT fk_game_game_chests_opened FOREIGN KEY (game_id) REFERENCES game(game_id),
     MODIFY created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    MODIFY open BOOLEAN DEFAULT 0,
     MODIFY modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE NOW();
-

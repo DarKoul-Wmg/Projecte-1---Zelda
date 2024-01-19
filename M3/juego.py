@@ -13,13 +13,14 @@ new_prompt = ""
 
 salir = False
 
-flg_01 = False
-flg_00 = True
-flg_03 = False
-flg_02 = False
-flg_04 = False
-flg_05 = False
-flg_06 = False
+flg_help = False
+flg_inicio = True
+flg_n_game = False
+flg_about = False
+flg_h_n_game = False
+flg_legend = False
+flg_plot = False
+flg_juego = False
 
 listamenu = [menu1,menu2,menu3]
 listamenu2 = [menu11,menu22,menu33]
@@ -38,14 +39,14 @@ game = {}
 while salir != True:
     if 'game_id'in game:
 
-        while flg_00:
+        while flg_inicio:
             clear_screen()
 
             print(listamenu[cabecera])
             prompt(promptlist)
             opc = input()
 
-            list.append(opc)
+            promptlist.append(opc)
 
             if not opc.replace(" ", "").isalpha() :
                 #print('Invalid action')
@@ -55,32 +56,32 @@ while salir != True:
             elif opc.lower() == 'exit':
 
                 clear_screen()
-                flg_00 = False
+                flg_inicio = False
                 salir = True
 
             elif opc.lower() == 'help':
 
                 clear_screen()
-                flg_00 = False
-                flg_01 = True
+                flg_inicio = False
+                flg_help = True
 
             elif opc.lower() == 'about':
 
                 clear_screen()
-                flg_00 = False
-                flg_02 = True
+                flg_inicio = False
+                flg_about = True
             elif opc.lower() == ('new game'):
 
                 clear_screen()
-                flg_00 = False
-                flg_03 = True
+                flg_inicio = False
+                flg_n_game = True
             else:
                 # print('Invalid action')
                 promptlist.append('Invalid action')
                     #version sin partida guardada
     elif not 'game_id'in game:
 
-        while flg_00:
+        while flg_inicio:
 
 
             print(listamenu2[cabecera2])
@@ -97,77 +98,77 @@ while salir != True:
             elif opc.lower() == 'exit':
 
                 clear_screen()
-                flg_00 = False
+                flg_inicio = False
                 salir = True
 
             elif opc.lower() == 'help':
 
                 clear_screen()
-                flg_00 = False
-                flg_01 = True
+                flg_inicio = False
+                flg_help = True
 
             elif opc.lower() == 'about':
 
                 clear_screen()
-                flg_00 = False
-                flg_02 = True
+                flg_inicio = False
+                flg_about = True
             elif opc.lower() == ('new game'):
 
                 clear_screen()
-                flg_00 = False
-                flg_03 = True
+                flg_inicio = False
+                flg_n_game = True
             else:
                 # print('Invalid action')
                 promptlist.append('Invalid action')
 
     ##menu help
-    while flg_01:
+    while flg_help:
 
         print(main_menu)
         prompt(promptlist)
 
         opcion1 = input()  # en blanco pendiente
-        list.append(opcion1)
+        promptlist.append(opcion1)
         if not opcion1.replace(" ", "").isalpha():
             #print('Invalid action')
             promptlist.append('Invalid action')
 
         elif opcion1.lower() == 'back':
             clear_screen()
-            flg_01 = False
-            flg_00 = True
+            flg_help = False
+            flg_inicio = True
 
         else:
             #print('Invalid action')
             promptlist.append('Invalid action')
     ##menu about
-    while flg_02:
+    while flg_about:
         ################probar sin flags
 
         print(menu_about)
-        prompt(list)
+        prompt(promptlist)
         opcion2 = input()  # en blanco pendiente
-        list.append(opcion2)
+        promptlist.append(opcion2)
         if not opcion2.replace(" ", "").isalpha():
             #print('Invalid action')
             promptlist.append('Invalid action')
 
         elif opcion2.lower() == 'back':
             clear_screen()
-            flg_02 = False
-            flg_00 = True
+            flg_about = False
+            flg_inicio = True
         else:
 
             promptlist.append('Invalid action')
 
     ##menu new game
-    while flg_03:
+    while flg_n_game:
         ###############
         print(new_game)
         prompt(promptlist)
 
         nombre = input("What\'s your name (Link)?\n")  ######ESTO QUEDA TOPE FEO#####################
-        list.append(nombre)
+        promptlist.append(nombre)
         if not nombre.isalnum() and nombre.replace(" ", ""):
             frase = nombre + " is not a valid name1"
             promptlist.append(frase)
@@ -188,18 +189,18 @@ while salir != True:
             game['user_name'] = nombre
             print(game)  ##PRUEBA
             clear_screen()
-            flg_03 = False
-            flg_05 = True
+            flg_n_game = False
+            flg_legend = True
 
 
         elif nombre.lower() == 'back':
             clear_screen()
-            flg_03 = False
-            flg_00 = True
+            flg_n_game = False
+            flg_inicio = True
         elif nombre.lower() == 'help':
             clear_screen()
-            flg_03 = False
-            flg_04 = True
+            flg_n_game = False
+            flg_h_n_game = True
 
         else:
 
@@ -210,12 +211,12 @@ while salir != True:
             game['user_name'] = nombre
             print(game)##PRUEBA
             clear_screen()
-            flg_03 = False
-            flg_05 = True
+            flg_n_game = False
+            flg_legend = True
 
 
     ##help_new_game
-    while flg_04:
+    while flg_h_n_game:
             print(help_new_game)
             prompt(promptlist)
             opcion4 = input()  # en blanco pendiente
@@ -225,13 +226,13 @@ while salir != True:
                 promptlist.append('Invalid action')
             elif opcion4.lower() == 'back':
                 clear_screen()
-                flg_04 = False
-                flg_03 = True
+                flg_h_n_game = False
+                flg_n_game = True
             else:
-                list.append('Invalid action')
+                promptlist.append('Invalid action')
 
     ##legend
-    while flg_05:
+    while flg_legend:
         print(menu_legend)
         prompt(promptlist)
         opcion5 = input()  # en blanco pendiente
@@ -241,18 +242,18 @@ while salir != True:
             promptlist.append('Invalid action')
         elif opcion5.lower() == 'continue':
             clear_screen()
-            flg_05 = False
-            flg_06 = True
+            flg_legend = False
+            flg_plot = True
         else:
             promptlist.append('Invalid action')
 
 
     ##plot
 
-    while flg_06:
-        t = len(nombre)
-        w = 28
-        x = w - t
+    while flg_plot:
+        longi_nombre = len(nombre)
+        total_esp = 28
+        e = total_esp - longi_nombre
         print("* Plot * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n"
               "*                                                                            *\n"
               "*                                                                            *\n"
@@ -261,13 +262,13 @@ while salir != True:
               "*                                                                            *\n"
               "*                                                                            *\n"
               f"*  But a young man named '{nombre}' has just awakened and".rjust(78),
-              '*'.rjust(x))  ######se espacia la *
+              '*'.rjust(e))  ######se espacia la *
         print("*  must reclaim the Guardians to defeat Ganon and save Hyrule.               *\n"
               "*                                                                            *\n"
               "*                                                                            *\n"
               "* Continue * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n")
 
-        prompt(list)
+        prompt(promptlist)
         opcion5 = input()  # en blanco pendiente
         if not opcion5.replace(" ", "").isalpha():
             #print('Invalid action')
@@ -277,13 +278,15 @@ while salir != True:
             #print('The adventure begins')
             promptlist.append('The adventure begins')
             clear_screen()
-            flg_06 = False
-            flg_07 = True
+            flg_plot = False
+            flg_juego = True
         else:
             promptlist.append('Invalid action')
 
-    while flg_06:
+
+    while flg_juego:
         print('juego')
+        break
         ##AQUI DEBERIA IR EL JUEGO
 
 

@@ -5,12 +5,13 @@ CREATE DATABASE IF NOT EXISTS zelda;
 USE zelda;
 
 /*elimina taules si eren creades*/
-DROP TABLE IF EXISTS game;
+
 DROP TABLE IF EXISTS game_food;
 DROP TABLE IF EXISTS game_weapons;
 DROP TABLE IF EXISTS game_enemies;
 DROP TABLE IF EXISTS game_sanctuaries_opened;
 DROP TABLE IF EXISTS game_chests_opened;
+DROP TABLE IF EXISTS game;
 
 /*Crea taules*/
 CREATE TABLE IF NOT EXISTS game (
@@ -20,8 +21,9 @@ CREATE TABLE IF NOT EXISTS game (
     blood_moon_countdown INT,
     blood_moon_appearances INT,
     region VARCHAR(20),
-	created_at TIMESTAMP,
-    modified_at TIMESTAMP
+    created_at TIMESTAMP,
+    modified_at TIMESTAMP,
+    ganon_dead BOOLEAN
 );
     
 CREATE TABLE IF NOT EXISTS game_food (
@@ -38,7 +40,8 @@ CREATE TABLE IF NOT EXISTS game_weapons (
     equiped BOOLEAN,
     lives_remaining INT,
     created_at TIMESTAMP,
-    modified_at TIMESTAMP
+    modified_at TIMESTAMP,
+    total_weapons INT
 );
     
 CREATE TABLE IF NOT EXISTS game_enemies (
@@ -59,7 +62,8 @@ CREATE TABLE IF NOT EXISTS game_sanctuaries_opened (
     xpos INT,
     ypos INT,
     created_at TIMESTAMP,
-    modified_at TIMESTAMP
+    modified_at TIMESTAMP,
+    open BOOLEAN
 );
 
 CREATE TABLE IF NOT EXISTS game_chests_opened (
@@ -69,7 +73,8 @@ CREATE TABLE IF NOT EXISTS game_chests_opened (
     xpos INT,
     ypos INT,
     created_at TIMESTAMP,
-    modified_at TIMESTAMP
+    modified_at TIMESTAMP,
+    open BOOLEAN
 );
 
 

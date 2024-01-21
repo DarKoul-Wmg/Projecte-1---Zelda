@@ -438,28 +438,41 @@ while True:
 
     if pregunta.lower() == 'go by the e':
 
+        coordenadas = []
+        for y in range(len(locations[actual_location])):
+            for x in range(len(locations[actual_location][y])):
+                if locations[actual_location][y][x] == "E":
+                    pos_x = x
+                    pos_y = y
+
+                    coordenadas.append((pos_x, pos_y))
+                    print(coordenadas)
+                    break
+                else:
+                    continue
+
         locations[actual_location][playerY][playerX] = playerX, playerY
-        E6 = 10, 2
+        E0 = coordenadas[0]
 
-        hipo_e6 = calcular_hipotenusa(locations[actual_location][playerY][playerX], E6)
+        hipo_e0 = calcular_hipotenusa(locations[actual_location][playerY][playerX], E0)
 
-        E7 = 38, 6
+        E1 = coordenadas[1]
 
-        hipo_e7 = calcular_hipotenusa(locations[actual_location][playerY][playerX], E7)
+        hipo_e1 = calcular_hipotenusa(locations[actual_location][playerY][playerX], E1)
 
-        if hipo_e6 < hipo_e7:
+        if hipo_e0 < hipo_e1:
             locations[actual_location][playerY][playerX] = ' '
-            playerY = 2
-            playerX = 9
+            playerY = coordenadas[0][1]
+            playerX = coordenadas[0][0] - 1
             locations[actual_location][playerY][playerX] = 'X'
 
         else:
             locations[actual_location][playerY][playerX] = ' '
-            playerY = 6
-            playerX = 37
+            playerY = coordenadas[1][1]
+            playerX = coordenadas[1][0] - 1
             locations[actual_location][playerY][playerX] = 'X'
 
-        # fox
+    # fox
     if pregunta.lower() == 'go by the f':
         locations[actual_location][playerY][playerX] = ' '
         playerY = 6
@@ -542,27 +555,18 @@ while True:
             locations[actual_location][playerY][playerX] = 'X'
 
         # s
-    if pregunta.lower() == 'go by the s':
-        locations[actual_location][playerY][playerX] = playerX, playerY
-        S5 = 51, 6
+    if pregunta.lower() == 'go by the s5':
 
-        hipo_s5 = calcular_hipotenusa(locations[actual_location][playerY][playerX], S5)
+        locations[actual_location][playerY][playerX] = ' '
+        playerY = 6
+        playerX = 50
+        locations[actual_location][playerY][playerX] = 'X'
+    if pregunta.lower() == 'go by the s6':
 
-        S6 = 33, 9
-
-        hipo_s6 = calcular_hipotenusa(locations[actual_location][playerY][playerX], S6)
-
-        if hipo_s5 < hipo_s6:
-            locations[actual_location][playerY][playerX] = ' '
-            playerY = 6
-            playerX = 50
-            locations[actual_location][playerY][playerX] = 'X'
-
-        else:
-            locations[actual_location][playerY][playerX] = ' '
-            playerY = 9
-            playerX = 32
-            locations[actual_location][playerY][playerX] = 'X'
+        locations[actual_location][playerY][playerX] = ' '
+        playerY = 9
+        playerX = 32
+        locations[actual_location][playerY][playerX] = 'X'
 
     # water
     if pregunta.lower() == 'go by the water':
@@ -586,24 +590,6 @@ while True:
             playerY = 5
             playerX = 50
             locations[actual_location][playerY][playerX] = 'X'
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

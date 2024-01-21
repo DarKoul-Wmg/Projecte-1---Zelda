@@ -532,7 +532,7 @@ while True:
             locations[actual_location][playerY][playerX] = 'X'
 
         # s
-    if pregunta.lower() == 'go by the s':
+    if pregunta.lower() == 'go by the s4':
         locations[actual_location][playerY][playerX] = ' '
         playerY = 3
         playerX = 45
@@ -544,23 +544,6 @@ while True:
         playerY = 9
         playerX = 53
         locations[actual_location][playerY][playerX] = 'X'
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

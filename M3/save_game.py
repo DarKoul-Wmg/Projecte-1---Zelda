@@ -2,6 +2,7 @@ import mysql.connector
 import datetime
 from armario_FUNCIONES import *
 from armario_PRINTS import *
+from diccionario_general import*
 
 help_save_game = ("* Help, saved games * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n"
                   "*                                                                             *\n"
@@ -65,7 +66,7 @@ def partidas_guardadas():
 
         for i, resultado in enumerate(resultados):
             game_id, user_name, region, hearts_remaining, total_hearts, modified_at = resultado
-            print(f"*  {str(game_id).ljust(2)}: {modified_at} - {user_name} {region}                                 ♥{str(hearts_remaining).rjust(1)}/{str(total_hearts).rjust(1)} *")
+            print(f"*  {str(game_id).ljust(2)}: {modified_at} - {str(user_name+', '+region).ljust(23)}                     ♥{str(hearts_remaining).rjust(1)}/{str(total_hearts).rjust(1)} *")
         print(    f"*                                                                             *")
         print ("* Play X, Erase X, Help, Back * * * * * * * * * * * * * * * * * * * * * * * * *" )
 
@@ -87,7 +88,7 @@ while flg_save_game:
 
     promptlist.append(opc)
 
-    if not opc.replace(" ", "").isalpha():
+    if not opc.replace(" ", "").isalnum():
         # print('Invalid action')
 
         promptlist.append('Invalid action')
@@ -96,8 +97,40 @@ while flg_save_game:
         clear_screen()
         flg_save_game = False
         flg_help_save_game = True
-    else:
-        promptlist.append('Invalid action')
+    elif opc[:6].lower() == 'erase ':
+        ##borrar
+        promptlist.append(opc)
+        id_str = opc[6:]
+        if not id_str.isdigit():
+            promptlist.append('Invalid action')
+        else:
+            id = int(id_str)
+            game_id_value = game["game_id"]
+            if id != game_id_value:
+                promptlist.append('Invalid action')
+                print('BORRAR LA PARTIDA')
+            else:
+                print('BORRAR LA PARTIDA')
+    elif opc[:6].lower() == 'play ':
+        ##cargar partida
+        promptlist.append(opc)
+        id_str = opc[5:]
+        if not id_str.isdigit():
+            promptlist.append('Invalid action0')
+        else:
+            id = int(id_str)
+            game_id_value = game["game_id"]
+            if id != game_id_value:
+                promptlist.append('Invalid action2')
+
+            else:
+                print('CARGAR PARTIDA')
+                ################################################################
+                ##FLG PARA JUEGO
+
+
+    #else:
+        #promptlist.append('Invalid action')
     ##help save game
     while flg_help_save_game:
         print(help_save_game)

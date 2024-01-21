@@ -217,16 +217,17 @@ def get_game_id():
 # ejectuta las funciones de cracion de todas las tablas, una vez obtenido el game_id
 def insert_all():
 
+    print("Loading...")
     insertFoods(game)
-    print("food insertado")
+    #print("food insertado")
     insertWeapons(game)
-    print("weapons insertado")
+    #print("weapons insertado")
     insertEnemies(game)
-    print("enemies insertado")
+    #print("enemies insertado")
     insertChestsOpened(game)
-    print("chests insertado")
+    #print("chests insertado")
     insertSanctuariesOpened(game)
-    print("sanct insertado")
+    #print("sanct insertado")
 
 #-----ORDEN DE EJECUCION-----!!!!!!!!!!!!
 # createGame(game)

@@ -3,6 +3,15 @@ import platform
 from diccionario_general import*
 import time
 
+##fun. hipotenusas
+import math
+
+def calcular_hipotenusa(punto1, punto2):
+    x1, y1 = punto1
+    x2, y2 = punto2
+    hipotenusa = math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
+    return hipotenusa
+
 promptlist = []
 #funcion prompt1
 
@@ -30,27 +39,27 @@ def clear_screen():
 
 ##FUINCION PRINT INVENTARIO FOOD
 
-#pregunta = 'Show inventory food'
+pregunta = 'Show inventory food'
 
 def inv_food(pregunta):
     if 'foods' in game:
-        z = game['foods']['Vegetables']['quantity_remaining']
-        v = game['foods']['Fish']['quantity_remaining']
-        m = game['foods']['Meat']['quantity_remaining']
-        s = game['foods']['Salads']['quantity_remaining']
-        p = game['foods']['Pescatarian']['quantity_remaining']
-        r = game['foods']['Roasted']['quantity_remaining']
+        vegetables = game['foods']['Vegetables']['quantity_remaining']
+        fish = game['foods']['Fish']['quantity_remaining']
+        meat = game['foods']['Meat']['quantity_remaining']
+        salads = game['foods']['Salads']['quantity_remaining']
+        pescatarian = game['foods']['Pescatarian']['quantity_remaining']
+        roasted = game['foods']['Roasted']['quantity_remaining']
         if pregunta == 'Show inventory food':
 
             menu_foods = ["* * * * *   Food *",
                           "                 *",
                           "                 *",
-                        f"Vegetables    {str(z).rjust(2)} *",
-                        f"Fish          {str(v).rjust(2)} *",
-                        f"Meat          {str(m).rjust(2)} *",
-                        f"Salads        {str(s).rjust(2)} *",
-                        f"Pescatarian   {str(p).rjust(2)} *",
-                        f"Roasted       {str(r).rjust(2)} *",
+                        f"Vegetables    {str(vegetables).rjust(2)} *",
+                        f"Fish          {str(fish).rjust(2)} *",
+                        f"Meat          {str(meat).rjust(2)} *",
+                        f"Salads        {str(salads).rjust(2)} *",
+                        f"Pescatarian   {str(pescatarian).rjust(2)} *",
+                        f"Roasted       {str(roasted).rjust(2)} *",
                         "                 *"]
 
             inv_actual = menu_foods
@@ -63,27 +72,27 @@ def inv_food(pregunta):
 
 
 
-pregunta = ('Show inventory weapons')
+#pregunta = ('Show inventory weapons')
 
 def weapons(pregunta):
     if pregunta == 'Show inventory weapons':
 
-        q = game['weapons']["Wood Sword"]["lives_remaining"]
-        q1 =game['weapons']["Wood Sword"]["total_weapons"]
+        ws = game['weapons']["Wood Sword"]["lives_remaining"]
+        ws1 =game['weapons']["Wood Sword"]["total_weapons"]
 
         if game['weapons']["Wood Sword"]["equipped"] == 1:
-            q2 = "(equiped)"
+            ws2 = "(equiped)"
         else:
-            q2 =""
+            ws2 =""
 
-        s = game['weapons']["Sword"]["lives_remaining"]
-        s1 =game['weapons']["Sword"]["total_weapons"]
+        sw = game['weapons']["Sword"]["lives_remaining"]
+        sw1 =game['weapons']["Sword"]["total_weapons"]
 
 
         if game['weapons']["Sword"]["equipped"] == 1:
-            s2 = "(equiped)"
+            sw2 = "(equiped)"
         else:
-            s2 =""
+            sw2 =""
 
         w = game['weapons']["Wood Shield"]["lives_remaining"]
         w1 =game['weapons']["Wood Shield"]["total_weapons"]
@@ -106,10 +115,10 @@ def weapons(pregunta):
         menu_weapons = ["* * * * * Weapons *",
                         "                  *",
                         "                  *",
-                        f"Wood Sword   {str(q).rjust(2)}/{str(q1).rjust(1)} *",
-                        f" {str(q2).ljust(10)}       *",
-                        f"Sword        {str(s).rjust(2)}/{str(s1).rjust(1)} *",
-                        f" {str(s2).ljust(10)}       *",
+                        f"Wood Sword   {str(ws).rjust(2)}/{str(ws1).rjust(1)} *",
+                        f" {str(ws2).ljust(10)}       *",
+                        f"Sword        {str(sw).rjust(2)}/{str(sw1).rjust(1)} *",
+                        f" {str(sw2).ljust(10)}       *",
                         "                  *",
                         f"Wood Shield  {str(w).rjust(2)}/{str(w1).rjust(1)} *",
                         f" {str(w2).ljust(10)}       *",
@@ -130,11 +139,12 @@ def weapons(pregunta):
 
 
 #FUNCION PRINT PANTALLA INVENTARIO
-#pregunta = 'Show inventory main'
+pregunta = 'Show inventory main'
 
 def main(pregunta):
-    n = game['player']['user_name']
-    b = game['player']['total_blood_moon']
+    un = game['player']['user_name']
+    tbm = game['player']['total_blood_moon']
+    hea = game['player']["health"]
     tw = ((game["weapons"]["Shield"]["total_weapons"] + game["weapons"]["Wood Shield"]["total_weapons"]
            + game["weapons"]["Sword"]["total_weapons"]) + game["weapons"]["Wood Sword"]["total_weapons"])
 
@@ -151,12 +161,19 @@ def main(pregunta):
 
                 weapon_list.append(weapon_name)
 
+        if len(weapon_list)==0:
+            weapon_list.append(' ')
+            weapon_list.append(' ')
+        elif len(weapon_list)==1:
+            weapon_list.append(' ')
+
+
         menu_inventory =  ["* * * * Inventory *",
                       "                  *",
-                      f"{str(n).ljust(10)}  ♥ {str(b).ljust(1)}/{str(max_blood_moon).ljust(1)} *",
+                      f"{str(un).ljust(10)}  ♥ {str(hea).ljust(1)}/{str(max_health).ljust(1)} *",
                       "                  *",
                       "Equipament        *",
-                      "                  *",
+                      f"Blood moon in  {str(tbm).rjust(2)} *",
                       f"      {str(weapon_list[0]).rjust(11)} *",
                       f"      {str(weapon_list[1]).rjust(11)} *",
                       "                  *",

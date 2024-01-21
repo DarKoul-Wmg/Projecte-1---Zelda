@@ -2,6 +2,7 @@ import datetime
 
 game = { #JUGADOR
     "game_id": 3,
+
     "player": {
         "user_name": "Link",
         "health": 3,
@@ -219,10 +220,10 @@ game = { #JUGADOR
 
     }
 }
-max_blood_moon= 2
+max_health= 2
 for key,value in game["sanctuaries_opened"].items():
     if value['open']== 1:
-        max_blood_moon += 1
+        max_health += 1
 #print(max_blood_moon)
 
 

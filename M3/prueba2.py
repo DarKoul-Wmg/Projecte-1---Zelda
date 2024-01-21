@@ -1,7 +1,7 @@
 import random
 from armario_PRINTS import*
 from armario_FUNCIONES import*
-
+from consultasBD import*
 
 
 
@@ -13,8 +13,10 @@ new_prompt = ""
 
 salir = False
 exit = False
+flg_principal = True
+flg_queries =False
 flg_help = False
-flg_inicio = True
+flg_inicio = False
 flg_n_game = False
 flg_about = False
 flg_h_n_game = False
@@ -29,17 +31,91 @@ cabecera = random.randrange(len(listamenu))
 cabecera2 = random.randrange(len(listamenu2))
 
 
-
-menu00 = ('continue','new game','help','about','exit')
+menu_principal ="1)Game 2)Queries BD 3)Exit"
+menu_queries = ("===================Consulta"
+                "s BD===================\n1)Usuarios que han jugado\n2)Cantidad de partidas jugadas por usuario"
+                "\n3)Armas usadas por usuario y datos por partida\n4)Comida consumida por usuario y datos por partida\n5)Estadistica de 'blood Moon'"
+                "\n==================================================")
+#menu00 = ('continue','new game','help','about','exit')
 
 game = {}
 
 while exit != True:
+    while flg_principal:
 
-while salir != True:
-    if 'game_id'in game:
+        print(menu_principal0)
+        print(menu_principal)
 
-        while flg_inicio:
+        opc = input("Opc: ")
+
+        if not opc.isdigit():
+            print("wrong option")
+        elif not int(opc) in range(1, 4):
+            print("wrong option")
+        elif int(opc) == 1:
+            flg_inicio = True
+            flg_principal = False
+        elif int(opc) == 2:
+            flg_principal = False
+            flg_queries = True
+        else:
+            exit = True
+            flg_principal = False
+    #queries
+    while flg_queries:
+        print(menu_queries)
+        opc = input("Opc: ")
+        print()
+        if not opc.isdigit():
+            print("wrong option")
+        elif not int(opc) in range(1, 6):
+            print("wrong option")
+        elif int(opc) == 1:
+            print("Usuario".ljust(12), "Ultima partida".rjust(18))
+            print(31 * '-')
+            users_last_played()
+            print()
+            input("Enter to continue")
+            print()
+        elif int(opc) == 2:
+            print("Usuario".ljust(12), "Partidas jugadas".rjust(18))
+            print(31 * '-')
+            played_by_user()
+            print()
+            input("Enter to continue")
+            print()
+        elif int(opc) == 3:
+            print("Usuario".ljust(12), "Arma".ljust(13), "Veces obtenida".rjust(3), "Última Fecha de Uso".rjust(22))
+            print(64 * '-')
+            weapons_used()
+            print()
+            input("Enter to continue")
+            print()
+        elif int(opc) == 4:
+            print("Usuario".ljust(12), "Comida".ljust(14), "Veces obtenida".ljust(3),
+                  "Última Fecha de consumo".rjust(26))
+            print(69 * '-')
+            print()
+            food_consumed()
+            print()
+            input("Enter to continue")
+            print()
+        elif int(opc) == 5:
+            print("Blood Moons".center(50))
+            print(50 * '-')
+
+            blood_moon_stats()
+            print()
+            input("Enter to continue")
+            print()
+
+
+###############################################################################################################################################3
+####parte vieja
+    while flg_inicio:
+        if 'game_id'in game:
+
+
             clear_screen()
 
             print(listamenu[cabecera])
@@ -57,7 +133,7 @@ while salir != True:
 
                 clear_screen()
                 flg_inicio = False
-                salir = True
+                flg_principal = True
 
             elif opc.lower() == 'help':
 
@@ -79,47 +155,47 @@ while salir != True:
                 # print('Invalid action')
                 promptlist.append('Invalid action')
                     #version sin partida guardada
-    elif not 'game_id'in game:
+        elif not 'game_id'in game:
 
-        while flg_inicio:
+            while flg_inicio:
 
 
-            print(listamenu2[cabecera2])
-            prompt(promptlist)
-            opc = input()
+                print(listamenu2[cabecera2])
+                prompt(promptlist)
+                opc = input()
 
-            promptlist.append(opc)
+                promptlist.append(opc)
 
-            if not opc.replace(" ", "").isalpha():
-                # print('Invalid action')
+                if not opc.replace(" ", "").isalpha():
+                    # print('Invalid action')
 
-                promptlist.append('Invalid action')
+                    promptlist.append('Invalid action')
 
-            elif opc.lower() == 'exit':
+                elif opc.lower() == 'exit':
 
-                clear_screen()
-                flg_inicio = False
-                salir = True
+                    clear_screen()
+                    flg_inicio = False
+                    flg_principal = True
 
-            elif opc.lower() == 'help':
+                elif opc.lower() == 'help':
 
-                clear_screen()
-                flg_inicio = False
-                flg_help = True
+                    clear_screen()
+                    flg_inicio = False
+                    flg_help = True
 
-            elif opc.lower() == 'about':
+                elif opc.lower() == 'about':
 
-                clear_screen()
-                flg_inicio = False
-                flg_about = True
-            elif opc.lower() == ('new game'):
+                    clear_screen()
+                    flg_inicio = False
+                    flg_about = True
+                elif opc.lower() == ('new game'):
 
-                clear_screen()
-                flg_inicio = False
-                flg_n_game = True
-            else:
-                # print('Invalid action')
-                promptlist.append('Invalid action')
+                    clear_screen()
+                    flg_inicio = False
+                    flg_n_game = True
+                else:
+                    # print('Invalid action')
+                    promptlist.append('Invalid action')
 
     ##menu help
     while flg_help:

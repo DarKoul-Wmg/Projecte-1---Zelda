@@ -201,3 +201,30 @@ zelda_seved = ("* Zelda saved * * * * * * * * * * * * * * * * * * * * * * * * * 
                "*                                                                             *\n"
                "* Continue  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n")
 
+help_save_game = ("* Help, saved games * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n"
+                  "*                                                                             *\n"
+                  "*                                                                             *\n"
+                  "*       Type 'play X' to continue playing the game 'X'                        *\n"
+                  "*       Type 'erase X' to erase the game 'X'                                  *\n"
+                  "*       Type 'back' now to go back to the main menu                           *\n"
+                  "*                                                                             *\n"
+                  "*                                                                             *\n"
+                  "*                                                                             *\n"
+                  "*       Type 'back' now to go back to 'Saved games'                           *\n"
+                  "*                                                                             *\n"
+                  "* Back * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n")
+
+menu_principal0= ("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n"
+                  "*                                                                $$ &&        *\n"
+                  "*                                                               $oo &&&       *\n"
+                  "*                                                          $$$    -- &&&      *\n"
+                  "*                                                          $$$   <<**&&&&     *\n"
+                  "*      ZELDA                                                $$  //***&&&&&    *\n"
+                  "*                                                            $$// ***&&&&&    *\n"
+                  "*                                                             **   ***&&&     *\n"
+                  "*                                                              &   @@@@\      *\n"
+                  "*                                                                  Q  Q       *\n"
+                  "*                                                                  Q  Q       *\n"
+                  "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *")
+
+

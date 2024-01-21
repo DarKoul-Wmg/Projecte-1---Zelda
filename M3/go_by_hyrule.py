@@ -74,6 +74,8 @@ locations={ "hyrule":[["*"," ","H","y","r","u","l","e"," "," ","*"," ","*"," ","
                 ["*"," "," ","G","e","r","u","d","o"," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," ","S","6","?"," "," "," "," "," "," ","N","e","c","l","u","d","a"," "," ","*"],
                 ["*"," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," ","*"],
                 ["*"," ","B","a","c","k"," "," ","*"," ","*"," ","*"," ","*"," ","*"," ","*"," ","*"," ","*"," ","*"," ","*"," ","*"," ","*"," ","*"," ","*"," ","*"," ","*"," ","*"," ","*"," ","*"," ","*"," ","*"," ","*"," ","*"," ","*"," ","*"," ","*"]]
+
+
 }
 
 
@@ -139,9 +141,12 @@ for y in range(len(locations[actual_location])):
        if locations[actual_location][y][x]=="!":
            playerX = x
            playerY = y
+           print(playerX,playerY)
            break
        else:
            continue
+
+
 
 
 
@@ -435,26 +440,41 @@ while True:
     ##hyrule
     # enemigos
     if pregunta.lower() == 'go by the e':
+        coordenadas =[]
+        for y in range(len(locations[actual_location])):
+            for x in range(len(locations[actual_location][y])):
+                if locations[actual_location][y][x] == "E":
+                    pos_x = x
+                    pos_y = y
+
+
+                    coordenadas.append((pos_x, pos_y))
+                    print(coordenadas)
+                    break
+                else:
+                    continue
 
         locations[actual_location][playerY][playerX] = playerX, playerY
-        E0 = 36, 5
+        E0 = coordenadas[0]
 
         hipo_e0 = calcular_hipotenusa(locations[actual_location][playerY][playerX], E0)
 
-        E1 = 21, 9
+        E1 = coordenadas[1]
 
         hipo_e1 = calcular_hipotenusa(locations[actual_location][playerY][playerX], E1)
+        actual_location = "hyrule"
+
 
         if hipo_e0 < hipo_e1:
             locations[actual_location][playerY][playerX] = ' '
-            playerY = 5
-            playerX = 35
+            playerY = coordenadas[0][1]
+            playerX = coordenadas[0][0]-1
             locations[actual_location][playerY][playerX] = 'X'
 
         else:
             locations[actual_location][playerY][playerX] = ' '
-            playerY = 9
-            playerX = 20
+            playerY = coordenadas[1][1]
+            playerX = coordenadas[1][0]-1
             locations[actual_location][playerY][playerX] = 'X'
 
     # fox
@@ -497,28 +517,19 @@ while True:
             locations[actual_location][playerY][playerX] = 'X'
 
     # s
-    if pregunta.lower() == 'go by the s':
+    if pregunta.lower() == 'go by the s0':
 
-        locations[actual_location][playerY][playerX] = playerX, playerY
-        S0 = 44, 6
+        locations[actual_location][playerY][playerX] = ' '
+        playerY = 6
+        playerX = 43
+        locations[actual_location][playerY][playerX] = 'X'
 
-        hipo_s0 = calcular_hipotenusa(locations[actual_location][playerY][playerX], S0)
+    if pregunta.lower() == 'go by the s1':
 
-        S1 = 31, 9
-
-        hipo_s1 = calcular_hipotenusa(locations[actual_location][playerY][playerX], S1)
-
-        if hipo_s0 < hipo_s1:
-            locations[actual_location][playerY][playerX] = ' '
-            playerY = 6
-            playerX = 43
-            locations[actual_location][playerY][playerX] = 'X'
-
-        else:
-            locations[actual_location][playerY][playerX] = ' '
-            playerY = 9
-            playerX = 30
-            locations[actual_location][playerY][playerX] = 'X'
+        locations[actual_location][playerY][playerX] = ' '
+        playerY = 9
+        playerX = 30
+        locations[actual_location][playerY][playerX] = 'X'
 
     # water
     if pregunta.lower() == 'go by the water':
